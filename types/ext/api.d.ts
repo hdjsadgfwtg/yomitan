@@ -365,6 +365,7 @@ type ApiSurface = {
     testYomitanApi: {
         params: {
             url: string;
+            apiKey: string;
         };
         return: true;
     };

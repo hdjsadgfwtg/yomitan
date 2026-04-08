@@ -1042,7 +1042,7 @@ export class Backend {
     }
 
     /** @type {import('api').ApiHandler<'testYomitanApi'>} */
-    async _onApiTestYomitanApi({url}) {
+    async _onApiTestYomitanApi({url, apiKey}) {
         if (!this._yomitanApi.isEnabled()) {
             throw new Error('Yomitan Api not enabled');
         }
@@ -1059,7 +1059,7 @@ export class Backend {
 
         const disconnect = !this._yomitanApi.isConnected();
         try {
-            const version = await this._yomitanApi.getRemoteVersion(url);
+            const version = await this._yomitanApi.getRemoteVersion(url, apiKey);
             if (version === null) {
                 throw new Error('Could not connect to native Yomitan API component');
             }

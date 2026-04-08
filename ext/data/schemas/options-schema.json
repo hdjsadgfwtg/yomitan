@@ -130,6 +130,7 @@
                                     "lineHeight",
                                     "enableYomitanApi",
                                     "yomitanApiServer",
+                                    "yomitanApiKey",
                                     "yomitanApiAllowCssSanitizationBypass"
                                 ],
                                 "properties": {
@@ -347,6 +348,10 @@
                                     "yomitanApiServer": {
                                         "type": "string",
                                         "default": "http://127.0.0.1:19633"
+                                    },
+                                    "yomitanApiKey": {
+                                        "type": "string",
+                                        "default": ""
                                     },
                                     "yomitanApiAllowCssSanitizationBypass": {
                                         "type": "boolean",

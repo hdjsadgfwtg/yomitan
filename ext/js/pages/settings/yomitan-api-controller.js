@@ -31,6 +31,8 @@ export class YomitanApiController {
         this._resultsContainer = querySelectorNotNull(document, '#test-yomitan-api-results');
         /** @type {HTMLInputElement} */
         this._urlInput = querySelectorNotNull(document, '#test-yomitan-url-input');
+        /** @type {HTMLInputElement} */
+        this._apiKeyInput = querySelectorNotNull(document, '#yomitan-api-key-input');
         /** @type {boolean} */
         this._testActive = false;
     }
@@ -60,7 +62,7 @@ export class YomitanApiController {
             /** @type {HTMLButtonElement} */ (this._testButton).disabled = true;
             resultsContainer.textContent = '';
             resultsContainer.hidden = true;
-            await this._api.testYomitanApi(this._urlInput.value);
+            await this._api.testYomitanApi(this._urlInput.value, this._apiKeyInput.value);
             this._setStatus('Connection was successful', false);
         } catch (e) {
             this._setStatus(toError(e).message, true);

@@ -107,13 +107,14 @@ export class YomitanApi {
 
     /**
      * @param {string} url
+     * @param {string} apiKey
      * @returns {Promise<?number>}
      */
-    async getRemoteVersion(url) {
+    async getRemoteVersion(url, apiKey) {
         if (this._port === null) {
             await this.startApiServer();
         }
-        await this._updateRemoteVersion(url);
+        await this._updateRemoteVersion(url, apiKey);
         return this._remoteVersion;
     }
 
@@ -536,14 +537,19 @@ export class YomitanApi {
 
     /**
      * @param {string} url
+     * @param {string} [apiKey]
      */
-    async _updateRemoteVersion(url) {
+    async _updateRemoteVersion(url, apiKey) {
         if (!url) {
             throw new Error('Missing Yomitan API URL');
         }
         try {
+            /** @type {HeadersInit} */
+            const headers = {};
+            if (apiKey) { headers['X-API-Key'] = apiKey; }
             const response = await fetch(url + '/serverVersion', {
                 method: 'POST',
+                headers,
             });
             /** @type {import('yomitan-api.js').remoteVersionResponse} */
             const {version} = await readResponseJson(response);
